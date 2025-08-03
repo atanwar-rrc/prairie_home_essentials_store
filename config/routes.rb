@@ -1,10 +1,24 @@
+# config/routes.rb
+
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Customer-facing root and products
+  root "products#index"
+  resources :products, only: [:index, :show]
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # Shopping cart routes
+  get    "cart",          to: "cart#show",   as: :cart
+  post   "cart/:id",      to: "cart#add",    as: :add_to_cart
+  delete "cart/:id",      to: "cart#remove", as: :remove_from_cart
+  patch  "cart/:id",      to: "cart#update", as: :update_cart
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Checkout routes
+  get  "checkout", to: "orders#new",    as: :new_order
+  post "checkout", to: "orders#create", as: :orders
+
+  # Admin/Devise routes
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
+  # Static pages (about, contact, etc.)
+  get "/:slug", to: "pages#show", as: :page
 end

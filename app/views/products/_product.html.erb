@@ -1,0 +1,8 @@
+<!-- app/views/products/_product.html.erb -->
+
+<div style="margin-bottom: 2rem;">
+  <h2><%= link_to product.name, product_path(product) %></h2>
+  <p><%= truncate(product.description, length: 100) %></p>
+  <p>Price: <%= number_to_currency(product.price) %></p>
+  <%= button_to "Add to Cart", add_to_cart_path(product), method: :post %>
+</div>

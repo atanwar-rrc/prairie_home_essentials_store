@@ -1,0 +1,26 @@
+<!-- app/views/cart/show.html.erb -->
+
+<h1>Your Shopping Cart</h1>
+
+<% if @cart.present? %>
+  <table>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th></th>
+    </tr>
+    <% @items.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= @cart[product.id.to_s] %></td>
+        <td>
+          <%= link_to "Remove", remove_from_cart_path(product), method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= link_to "Proceed to Checkout", new_order_path, class: "button" %>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

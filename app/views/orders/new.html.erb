@@ -1,0 +1,24 @@
+<!-- app/views/orders/new.html.erb -->
+
+<h1>Checkout</h1>
+
+<% if @items.any? %>
+  <p>Please confirm your order:</p>
+  <ul>
+    <% @items.each do |product| %>
+      <li><%= product.name %> × <%= @cart[product.id.to_s] %></li>
+    <% end %>
+  </ul>
+
+  <%= form_with url: orders_path, method: :post, local: true do %>
+    <div>
+      <%= label_tag :name, "Your Name" %>
+      <%= text_field_tag :name %>
+    </div>
+    <div>
+      <%= submit_tag "Confirm Order" %>
+    </div>
+  <% end %>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

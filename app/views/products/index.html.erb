@@ -1,0 +1,26 @@
+<!-- app/views/products/index.html.erb -->
+
+<h1>Products</h1>
+
+<%= form_with url: products_path, method: :get, local: true do %>
+  <div>
+    <%= label_tag :search, "Keyword" %>
+    <%= text_field_tag :search, params[:search] %>
+  </div>
+
+  <div>
+    <%= label_tag :category_id, "Category" %>
+    <%= select_tag :category_id,
+                   options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+                   include_blank: "All Categories" %>
+  </div>
+
+  <div>
+    <%= submit_tag "Search" %>
+  </div>
+<% end %>
+
+<hr/>
+
+
+<%= render partial: "product", collection: @products, as: :product %>
