@@ -1,23 +1,37 @@
-<!-- app/views/layouts/application.html.erb -->
-
 <!DOCTYPE html>
 <html>
   <head>
     <title>Prairie Home Essentials Store</title>
-    <meta charset="utf-8">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 CSS (CDN) -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous">
+
+    <!-- Your app stylesheet and JS (optional) -->
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body>
-    <!-- Flash messages -->
     <% flash.each do |key, message| %>
-      <div class="alert <%= key %>"><%= message %></div>
+      <div class="alert alert-info my-2"><%= message %></div>
     <% end %>
 
-    <%= yield %>
+    <div class="container my-4">
+      <%= yield %>
+    </div>
+
+    <!-- Bootstrap JS bundle (for buttons, etc.) -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
   </body>
 </html>

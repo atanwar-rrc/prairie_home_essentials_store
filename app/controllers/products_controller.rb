@@ -1,25 +1,24 @@
-# app/controllers/products_controller.rb
-
 class ProductsController < ApplicationController
   def index
-    @categories = Category.all
+    # Show all categories for the filter dropdown
+    @categories = Category.order(:name)
 
-    products = Product.includes(:categories)
+    # Start with all products
+    @products = Product.all
 
-    # Keyword search by product name (case-insensitive)
+    # If a search term is provided, filter by name (case-insensitive)
     if params[:search].present?
       keyword = params[:search].downcase
-      products = products.where("LOWER(name) LIKE ?", "%#{keyword}%")
+      @products = @products.where("LOWER(name) LIKE ?", "%#{keyword}%")
     end
 
-    # Filter by category if a category_id param is provided
+    # If a category_id is provided (i.e. not blank), filter by category
     if params[:category_id].present?
-      products = products.joins(:categories)
-                         .where(categories: { id: params[:category_id] })
+      @products = @products.where(category_id: params[:category_id])
     end
 
-    # You can add pagination here if you wish (e.g. using Kaminari or will_paginate)
-    @products = products.order(:name)
+    # Finally, order the results by product name
+    @products = @products.order(:name)
   end
 
   def show

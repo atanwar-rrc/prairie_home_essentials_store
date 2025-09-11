@@ -1,8 +1,6 @@
-<!-- app/views/products/_product.html.erb -->
-
-<div style="margin-bottom: 2rem;">
-  <h2><%= link_to product.name, product_path(product) %></h2>
+<div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: calc(33.333% - 1rem); box-sizing: border-box; margin-bottom: 1rem;">
+  <h5><%= link_to product.name, product_path(product) %></h5>
   <p><%= truncate(product.description, length: 100) %></p>
-  <p>Price: <%= number_to_currency(product.price) %></p>
+  <p><strong><%= number_to_currency(product.price) %></strong></p>
   <%= button_to "Add to Cart", add_to_cart_path(product), method: :post %>
 </div>
