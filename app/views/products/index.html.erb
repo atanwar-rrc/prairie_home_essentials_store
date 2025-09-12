@@ -23,4 +23,6 @@
 <hr/>
 
 
-<%= render partial: "product", collection: @products, as: :product %>
+<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+  <%= render partial: "product", collection: @products, as: :product %>
+</div>
