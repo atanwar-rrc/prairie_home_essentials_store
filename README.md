@@ -1,31 +1,24 @@
 # Prairie Home Essentials Store
 
-Prairie Home Essentials Store is a simple e‑commerce application built with Ruby on Rails.  
-It demonstrates the core features of an online shop: browsing and filtering products, searching by keyword, adding items to a cart, and checking out.  The project also includes a basic admin interface to manage products and categories.
+Prairie Home Essentials Store is a sample e‑commerce application built with **Ruby on Rails**.  It demonstrates core features of an online shop – browsing and filtering products, searching by keyword, adding items to a cart, and checking out.  An administrative interface (powered by ActiveAdmin) lets you manage products, categories and pages.
 
 ## Features
 
-- Browse a catalog of home essentials products.
-- Filter products by category using a dropdown menu.
-- Search products by keyword (name or description).
-- Responsive product grid layout for a clean, modern look.
-- Add items to a shopping cart and adjust quantities.
-- Simplified checkout process.
-- Basic admin functionality to create, edit and delete products and categories.
+- Browse a catalogue of home‑essentials products with images, prices and descriptions.
+- Filter by category and search by keyword.
+- Responsive product grid layout using Bootstrap.
+- Add items to a shopping cart, update quantities and remove items.
+- Checkout flow with order summary and simple form.
+- Basic admin interface to create, edit and delete products, categories and pages.
 - Sample seed data for products and categories.
 
-## Prerequisites
+## Screenshots
 
-- **Ruby** 3.0 or later.
-- **Rails** 7.0 or later.
-- **Database**: SQLite3 is used in development (no additional setup required).  
-  You can configure PostgreSQL or MySQL for production in `config/database.yml`.
+(Add screenshots of the home page, product listing and cart here.)
 
 ## Setup
 
-Follow these steps to run the application locally:
-
-1. **Clone the repository**  
+1. **Clone the repository**
    ```bash
-   git clone https://github.com/atanwar-rrc/prairie_home_essentials_store.git
+   git clone https://github.com/your‑username/prairie_home_essentials_store.git
    cd prairie_home_essentials_store

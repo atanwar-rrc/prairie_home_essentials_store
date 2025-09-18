@@ -1,28 +1,37 @@
-<!-- app/views/products/index.html.erb -->
-
 <h1>Products</h1>
 
+<!-- Hero/Banner -->
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5">
+    <h2 class="display-5 fw-bold">Welcome to Prairie Home Essentials</h2>
+    <p class="col-md-8 fs-5">
+      Discover quality home essentials at great prices. Browse our range of products and find the perfect items for every room.
+    </p>
+    <a href="#product-grid" class="btn btn-primary btn-lg">Shop Now</a>
+  </div>
+</div>
+
 <%= form_with url: products_path, method: :get, local: true do %>
-  <div>
-    <%= label_tag :search, "Keyword" %>
-    <%= text_field_tag :search, params[:search] %>
-  </div>
-
-  <div>
-    <%= label_tag :category_id, "Category" %>
-    <%= select_tag :category_id,
-                   options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
-                   include_blank: "All Categories" %>
-  </div>
-
-  <div>
-    <%= submit_tag "Search" %>
+  <div class="row g-3 align-items-end mb-3">
+    <div class="col-md-6">
+      <%= label_tag :search, "Keyword", class: "form-label" %>
+      <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search products…" %>
+    </div>
+    <div class="col-md-4">
+      <%= label_tag :category_id, "Category", class: "form-label" %>
+      <%= select_tag :category_id,
+            options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+            include_blank: "All Categories",
+            class: "form-select" %>
+    </div>
+    <div class="col-md-2">
+      <%= submit_tag "Search", class: "btn btn-primary w-100" %>
+    </div>
   </div>
 <% end %>
 
-<hr/>
+<hr>
 
-
-<div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+<div id="product-grid" class="row row-cols-1 row-cols-md-3 g-4">
   <%= render partial: "product", collection: @products, as: :product %>
 </div>

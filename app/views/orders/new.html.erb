@@ -1,23 +1,23 @@
-<!-- app/views/orders/new.html.erb -->
-
 <h1>Checkout</h1>
 
 <% if @items.any? %>
-  <p>Please confirm your order:</p>
-  <ul>
+  <p>Please review your order:</p>
+  <ul class="list-group mb-4">
     <% @items.each do |product| %>
-      <li><%= product.name %> × <%= @cart[product.id.to_s] %></li>
+      <% quantity = @cart[product.id.to_s].to_i %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span><%= product.name %> × <%= quantity %></span>
+        <span class="fw-bold"><%= number_to_currency(product.price * quantity) %></span>
+      </li>
     <% end %>
   </ul>
-
   <%= form_with url: orders_path, method: :post, local: true do %>
-    <div>
-      <%= label_tag :name, "Your Name" %>
-      <%= text_field_tag :name %>
+    <div class="mb-3">
+      <%= label_tag :name, "Your Name", class: "form-label" %>
+      <%= text_field_tag :name, nil, class: "form-control", required: true %>
     </div>
-    <div>
-      <%= submit_tag "Confirm Order" %>
-    </div>
+    <!-- Additional fields (email, address) can be added here -->
+    <%= submit_tag "Confirm Order", class: "btn btn-success" %>
   <% end %>
 <% else %>
   <p>Your cart is empty.</p>

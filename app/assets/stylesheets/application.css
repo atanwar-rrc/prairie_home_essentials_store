@@ -1,3 +1,11 @@
+/* Use the Montserrat font for the whole site */
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Custom alert colour for notice messages */
 .alert.notice {
   background-color: #e6ffed;
   border: 1px solid #b5e7c8;
@@ -7,32 +15,29 @@
   border-radius: 4px;
 }
 
-.alert.notice {
-  background-color: #e6ffed;
-  border: 1px solid #b5e7c8;
-  color: #206a37;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 4px;
+/* Product card hover and shadow effects */
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-/* product grid */
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding: 0;
-  list-style: none;
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
-.product-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
-  width: calc(33.333% - 1rem);
-  box-sizing: border-box;
-}
-.product-card h5 { margin-top: 0; font-size: 1.1rem; }
-.product-card p  { margin: 0.5rem 0; }
-.product-card form { margin-top: 0.5rem; }
 
-body { outline: 3px dashed hotpink; }
+/* Make product images uniform in height and crop if necessary */
+.product-card img {
+  object-fit: cover;
+  height: 200px;
+}
+
+/* Gradient buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #5b9df9 0%, #447de8 100%);
+  border: none;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #447de8 0%, #356bc6 100%);
+}

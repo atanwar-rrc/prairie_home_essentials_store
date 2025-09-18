@@ -1,6 +1,16 @@
-<div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; width: calc(33.333% - 1rem); box-sizing: border-box; margin-bottom: 1rem;">
-  <h5><%= link_to product.name, product_path(product) %></h5>
-  <p><%= truncate(product.description, length: 100) %></p>
-  <p><strong><%= number_to_currency(product.price) %></strong></p>
-  <%= button_to "Add to Cart", add_to_cart_path(product), method: :post %>
+<div class="col">
+  <div class="card h-100 product-card">
+    <% if product.image_url.present? %>
+      <img src="<%= product.image_url %>" class="card-img-top" alt="<%= product.name %>">
+    <% end %>
+    <div class="card-body">
+      <h5 class="card-title"><%= link_to product.name, product_path(product) %></h5>
+      <p class="card-text"><%= truncate(product.description, length: 100) %></p>
+      <p class="card-text fw-bold"><%= number_to_currency(product.price) %></p>
+    </div>
+    <div class="card-footer bg-white border-top-0">
+      <%= button_to "Add to Cart", add_to_cart_path(product), method: :post,
+            class: "btn btn-primary w-100" %>
+    </div>
+  </div>
 </div>
