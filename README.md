@@ -23,10 +23,6 @@ Static pages – Use the Pages feature to add content such as About or Contact p
 
 Seed data – The repository includes seed data to populate products and categories for testing.
 
-Screenshots
-
-Add screenshots of the home page, product listing and cart here after running the application locally. These images will help readers understand how the store looks.
-
 Getting Started
 
 Follow these steps to run the application on your local machine.
