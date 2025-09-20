@@ -1,24 +1,46 @@
-<h1>Checkout</h1>
+<section class="checkout-card">
+  <h1 class="mb-4">Checkout</h1>
 
-<% if @items.any? %>
-  <p>Please review your order:</p>
-  <ul class="list-group mb-4">
-    <% @items.each do |product| %>
-      <% quantity = @cart[product.id.to_s].to_i %>
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span><%= product.name %> Ã— <%= quantity %></span>
-        <span class="fw-bold"><%= number_to_currency(product.price * quantity) %></span>
+  <% if @items.any? %>
+    <p class="text-muted">Review your selections and enter your details to finish your order.</p>
+
+    <ul class="list-group checkout-list mb-4">
+      <% total = 0 %>
+      <% @items.each do |product| %>
+        <% quantity = @cart[product.id.to_s].to_i %>
+        <% subtotal = product.price * quantity %>
+        <% total += subtotal %>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <span><strong><%= product.name %></strong> · <%= quantity %> pcs</span>
+          <span class="fw-semibold"><%= number_to_currency(subtotal) %></span>
+        </li>
+      <% end %>
+      <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
+        <span>Total</span>
+        <span><%= number_to_currency(total) %></span>
       </li>
+    </ul>
+
+    <%= form_with url: orders_path, method: :post, local: true, class: "row g-3" do %>
+      <div class="col-md-6">
+        <%= label_tag :name, "Full name", class: "form-label" %>
+        <%= text_field_tag :name, nil, class: "form-control", required: true, placeholder: "Alex Prairie" %>
+      </div>
+      <div class="col-md-6">
+        <%= label_tag :email, "Email", class: "form-label" %>
+        <%= email_field_tag :email, nil, class: "form-control", required: true, placeholder: "you@example.com" %>
+      </div>
+      <div class="col-12">
+        <%= label_tag :address, "Delivery address", class: "form-label" %>
+        <%= text_area_tag :address, nil, class: "form-control", rows: 3, required: true, placeholder: "123 Meadow Lane, Winnipeg, MB" %>
+      </div>
+      <div class="col-12 d-flex gap-3">
+        <%= submit_tag "Confirm order", class: "btn btn-success" %>
+        <%= link_to "Keep browsing", products_path, class: "btn btn-outline-secondary" %>
+      </div>
     <% end %>
-  </ul>
-  <%= form_with url: orders_path, method: :post, local: true do %>
-    <div class="mb-3">
-      <%= label_tag :name, "Your Name", class: "form-label" %>
-      <%= text_field_tag :name, nil, class: "form-control", required: true %>
-    </div>
-    <!-- Additional fields (email, address) can be added here -->
-    <%= submit_tag "Confirm Order", class: "btn btn-success" %>
+  <% else %>
+    <p class="lead">Your cart is empty. Add a few prairie essentials first.</p>
+    <%= link_to "Browse products", products_path, class: "btn btn-primary" %>
   <% end %>
-<% else %>
-  <p>Your cart is empty.</p>
-<% end %>
+</section>

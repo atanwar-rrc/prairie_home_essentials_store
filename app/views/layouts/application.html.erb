@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Prairie Home Essentials Store</title>
+    <title>Prairie Home Essentials</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Your custom styles -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
 
   <body class="d-flex flex-column min-vh-100">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
       <div class="container">
         <%= link_to "Prairie Home Essentials", root_path, class: "navbar-brand" %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -29,41 +24,44 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link" %></li>
-            <li class="nav-item"><%= link_to "Cart", cart_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Products", products_path, class: "nav-link #{'active' if current_page?(products_path)}" %></li>
+            <li class="nav-item"><%= link_to "Cart", cart_path, class: "nav-link #{'active' if current_page?(cart_path)}" %></li>
             <li class="nav-item"><%= link_to "Admin", admin_root_path, class: "nav-link" %></li>
           </ul>
+          <div class="d-flex gap-2">
+            <%= link_to "About", (about_page = Page.find_by(slug: 'about')) ? page_path(about_page) : '#', class: "btn btn-outline-secondary" %>
+            <%= link_to "Shop now", products_path, class: "btn btn-primary" %>
+          </div>
         </div>
       </div>
     </nav>
 
-    <!-- Flash messages -->
-    <div class="container mt-3">
-      <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
-          <%= message %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% end %>
+    <div class="site-shell">
+      <div class="container">
+        <% flash.each do |key, message| %>
+          <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
+            <%= message %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
     </div>
 
-    <!-- Main content -->
-    <main class="container py-4">
-      <%= yield %>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-light py-4 mt-auto border-top">
-      <div class="container d-flex justify-content-between">
-        <span class="text-muted">© <%= Time.current.year %> Prairie Home Essentials</span>
-        <ul class="list-inline mb-0">
-          <li class="list-inline-item"><%= link_to "About", page_path(Page.find_by(slug: "about")) rescue "About" %></li>
-          <li class="list-inline-item"><%= link_to "Contact", page_path(Page.find_by(slug: "contact")) rescue "Contact" %></li>
-        </ul>
+    <footer class="py-4 mt-auto border-top">
+      <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+        <span class="text-muted">&copy; <%= Time.current.year %> Prairie Home Essentials. Designed for prairie living.</span>
+        <div class="d-flex gap-3">
+          <% if (contact_page = Page.find_by(slug: 'contact')) %>
+            <%= link_to "Contact", page_path(contact_page) %>
+          <% end %>
+          <%= link_to "Instagram", "#" %>
+          <%= link_to "Pinterest", "#" %>
+        </div>
       </div>
     </footer>
 
-    <!-- Bootstrap 5 JS bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
