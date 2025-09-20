@@ -15,9 +15,12 @@
         <h5 class="card-title mb-1"><%= link_to product.name, product_path(product) %></h5>
         <p class="card-text mb-0"><%= truncate(product.description, length: 110) %></p>
       </div>
-      <div class="mt-auto d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-between align-items-center">
         <span class="fw-bold text-dark"><%= number_to_currency(product.price) %></span>
-        <%= button_to "Add to cart", add_to_cart_path(product), method: :post, class: "btn btn-primary" %>
+        <span class="stock-indicator <%= stock_badge_class(product.stock) %>"><%= stock_badge_label(product.stock) %></span>
+      </div>
+      <div class="mt-auto">
+        <%= button_to "Add to cart", add_to_cart_path(product), method: :post, class: "btn btn-primary w-100" %>
       </div>
     </div>
   </div>

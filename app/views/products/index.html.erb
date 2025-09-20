@@ -66,6 +66,62 @@
   </div>
 </section>
 
+<section class="service-grid">
+  <% @service_highlights.each do |highlight| %>
+    <article class="service-card">
+      <h3><%= highlight[:title] %></h3>
+      <p><%= highlight[:body] %></p>
+    </article>
+  <% end %>
+</section>
+
 <section id="product-grid" class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
   <%= render partial: "product", collection: @products, as: :product %>
+</section>
+
+<% if @low_stock_products.any? %>
+  <section class="low-stock">
+    <div class="low-stock__header">
+      <h2>Almost gone favourites</h2>
+      <p>These pieces are nearly sold through for the season-add them now and we will hold them for 48 hours.</p>
+    </div>
+    <div class="low-stock__grid">
+      <% @low_stock_products.each do |product| %>
+        <div class="low-stock__card">
+          <div>
+            <strong><%= product.name %></strong>
+            <p><%= truncate(product.description, length: 110) %></p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="fw-semibold"><%= number_to_currency(product.price) %></span>
+            <%= link_to "Quick view", product_path(product), class: "btn btn-outline-secondary btn-sm" %>
+          </div>
+          <small class="text-muted">Only <%= product.stock %> left in stock</small>
+        </div>
+      <% end %>
+    </div>
+  </section>
+<% end %>
+
+<section class="testimonial-grid">
+  <% @testimonials.each do |testimonial| %>
+    <figure class="testimonial-card">
+      <blockquote>"<%= testimonial[:quote] %>"</blockquote>
+      <figcaption><%= testimonial[:name] %></figcaption>
+    </figure>
+  <% end %>
+</section>
+
+<section class="cta-banner">
+  <div class="cta-banner__content">
+    <div>
+      <h2>Book a 20-minute styling session</h2>
+      <p>Share photos of your space and we will respond with a layered shopping list that honours your prairie light and layout.</p>
+    </div>
+    <% if (contact_page = Page.find_by(slug: 'contact')) %>
+      <%= link_to "Schedule now", page_path(contact_page), class: "btn btn-primary btn-lg" %>
+    <% else %>
+      <a class="btn btn-primary btn-lg" href="mailto:hello@prairiehome.ca">Schedule now</a>
+    <% end %>
+  </div>
 </section>

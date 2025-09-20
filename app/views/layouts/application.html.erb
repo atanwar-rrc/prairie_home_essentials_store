@@ -36,15 +36,16 @@
       </div>
     </nav>
 
+    <% if flash.any? %>
+      <div class="flash-stack">
+        <% flash.each do |key, message| %>
+          <div class="app-toast app-toast--<%= key %>"><%= message %></div>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="site-shell">
       <div class="container">
-        <% flash.each do |key, message| %>
-          <div class="alert alert-<%= key %> alert-dismissible fade show" role="alert">
-            <%= message %>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        <% end %>
-
         <%= yield %>
       </div>
     </div>
